@@ -1,0 +1,50 @@
+# Jalankan dari folder docker/ :   docker compose up -d
+#   Aplikasi   : http://localhost:8080
+#   phpMyAdmin : http://localhost:8081   (user: root, sandi: lihat MYSQL_ROOT_PASSWORD)
+# Catatan offline: image hanya perlu diunduh SEKALI saat ada internet. Lihat docs/05-instalasi-docker.md.
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: gelanggang
+      DB_USER: root
+      DB_PASS: gelanggang_lokal
+    volumes:
+      - ..:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: gelanggang_lokal
+      MYSQL_DATABASE: gelanggang
+    volumes:
+      - dbdata:/var/lib/mysql
+      # Skema dimuat otomatis saat volume kosong. Untuk data contoh, tambahkan baris kedua di bawahnya.
+      - ../database/gelanggang.sql:/docker-entrypoint-initdb.d/01-gelanggang.sql:ro
+      # - ../database/data_contoh.sql:/docker-entrypoint-initdb.d/02-data-contoh.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pgelanggang_lokal"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    environment:
+      PMA_HOST: db
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+volumes:
+  dbdata:

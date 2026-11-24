@@ -1,0 +1,6 @@
+# Cegah folder internal dibuka langsung dari browser (Apache/XAMPP).
+Options -Indexes
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(app|database|docker)(/|$) - [F,L]
+</IfModule>

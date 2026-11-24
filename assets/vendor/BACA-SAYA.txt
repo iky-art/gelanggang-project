@@ -1,0 +1,1 @@
+Letakkan bootstrap.min.css dan bootstrap.bundle.min.js (versi 5.3.3) di folder ini. Lihat docs/03-memasang-bootstrap-offline.md

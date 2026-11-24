@@ -1,0 +1,5 @@
+# Berkas Bootstrap diunduh sendiri lewat siapkan-aset.php
+assets/vendor/*.css
+assets/vendor/*.js
+.DS_Store
+Thumbs.db
