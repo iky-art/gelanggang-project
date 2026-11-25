@@ -4,7 +4,7 @@ Aplikasi manajemen turnamen e-sport sekolah: tim, pemain, jadwal, skor, klasemen
 
 ## Video demo
 
-[▶ Tonton video demo](video/demo.mp4)
+[▶ Tonton video demo](https://github.com/user-attachments/assets/188923b1-3962-4846-8a57-a8c5eafc7dc6)
 
 Video ±42 detik ini dibuat **dengan kode** memakai [Remotion](https://www.remotion.dev/) (folder `video/`): masalah turnamen manual, fitur, alur, klasemen dengan head-to-head, bagan gugur, input skor yang aman, dan keamanan. Isinya data contoh, bukan hasil turnamen nyata.
 
