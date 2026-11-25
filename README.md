@@ -2,6 +2,10 @@
 
 Aplikasi manajemen turnamen e-sport sekolah: tim, pemain, jadwal, skor, klasemen, dan bagan gugur otomatis. Dibuat dengan **PHP polos + MySQL (phpMyAdmin) + Bootstrap 5.3**, berjalan **penuh offline** di localhost, dan disiapkan sebagai contoh proyek UKK RPL.
 
+## Situs resmi
+
+Situs statis di folder [`situs/`](situs/) berisi video demo, penjelasan logika, kalkulator bagan dan jadwal liga, serta cara pasang. Terbitkan lewat GitHub Pages: **Settings → Pages → Source: GitHub Actions**, lalu jalankan workflow **Deploy situs**. Alamatnya biasanya `https://iky-art.github.io/gelanggang-project/`. Detail di [`situs/README.md`](situs/README.md).
+
 ## Video demo
 
 [▶ Tonton video demo](https://github.com/user-attachments/assets/188923b1-3962-4846-8a57-a8c5eafc7dc6)
@@ -33,6 +37,7 @@ Jalur lain: Docker (`docker/`), Termux (`docs/06-instalasi-termux-android.md`).
 | `docker/` | Dockerfile dan docker-compose |
 | `tests/` | Uji logika inti (`tests/uji-logika.php`) |
 | `video/` | Video demo dibuat dengan kode (Remotion) |
+| `situs/` | Situs resmi statis (GitHub Pages) |
 | `docs/` | Dokumentasi lengkap (25 berkas) |
 | `presentasi/` | Bahan presentasi UKK (25 berkas) |
 

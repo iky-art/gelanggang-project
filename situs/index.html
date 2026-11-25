@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gelanggang · manajemen turnamen e-sport sekolah</title>
+<meta name="description" content="Gelanggang membantu panitia turnamen e-sport sekolah mengelola tim, jadwal, dan skor. Klasemen dan bagan gugur dihitung otomatis. PHP, MySQL, Bootstrap, berjalan offline di localhost.">
+<meta name="theme-color" content="#2F6BFF">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gelanggang · manajemen turnamen e-sport sekolah">
+<meta property="og:description" content="Klasemen, bagan gugur, dan jadwal turnamen sekolah dihitung otomatis. Berjalan offline di localhost.">
+<meta property="og:locale" content="id_ID">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="lompat" href="#isi">Lewati ke konten</a>
+
+<header class="atas">
+  <div class="wadah atas-dalam">
+    <a class="merek" href="#beranda" aria-label="Gelanggang, ke bagian atas">
+      <span class="merek-tanda" aria-hidden="true"></span>Gelanggang
+    </a>
+    <nav class="nav" aria-label="Navigasi utama">
+      <a href="#demo">Video</a>
+      <a href="#fitur">Fitur</a>
+      <a href="#logika">Logika</a>
+      <a href="#coba">Coba</a>
+      <a href="#pasang">Pasang</a>
+      <a href="#dokumen">Dokumen</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="tombol tombol-kecil" href="https://github.com/iky-art/gelanggang-project" rel="noopener">GitHub</a>
+  </div>
+</header>
+
+<main id="isi">
+
+<section class="hero" id="beranda" aria-labelledby="judul-hero">
+  <div class="wadah hero-isi">
+    <div>
+      <span class="kicker">Contoh proyek UKK RPL · PHP + MySQL + Bootstrap</span>
+      <h1 id="judul-hero">Klasemen, bagan, dan jadwal turnamen sekolah, dihitung otomatis</h1>
+      <p class="hero-teks">Gelanggang membantu panitia turnamen e-sport sekolah mengelola tim, jadwal, dan skor. Aplikasinya berjalan di localhost, tanpa internet.</p>
+      <div class="hero-aksi">
+        <a class="tombol tombol-utama" href="#demo">Tonton video demo</a>
+        <a class="tombol" href="#pasang">Pasang di komputer</a>
+      </div>
+      <p class="hero-catatan">Gratis, lisensi MIT. Tidak ada versi online: aplikasi PHP ini dijalankan sendiri di XAMPP, Docker, atau Termux.</p>
+    </div>
+
+    <figure class="papan" aria-label="Contoh tampilan papan skor Gelanggang" style="margin:0">
+      <div class="papan-kepala"><span>Grup A · ronde 3</span><span>Contoh data</span></div>
+      <div class="papan-laga">
+        <div class="papan-tim"><span class="titik" style="background:#E8553F" aria-hidden="true"></span>Dewa</div>
+        <div class="skor" aria-label="Skor 1 lawan 0"><span data-hitung="1">1</span><i>:</i><span data-hitung="0">0</span></div>
+        <div class="papan-tim b">Bima<span class="titik" style="background:#7A5AF8" aria-hidden="true"></span></div>
+      </div>
+      <table>
+        <caption class="sr">Contoh klasemen Grup A</caption>
+        <thead><tr><th scope="col">Tim</th><th scope="col">M</th><th scope="col">SG</th><th scope="col">Poin</th></tr></thead>
+        <tbody>
+          <tr class="lolos"><td>Citra</td><td>3</td><td>+2</td><td class="p" data-hitung="7">7</td></tr>
+          <tr class="lolos"><td>Aster</td><td>3</td><td>0</td><td class="p" data-hitung="4">4</td></tr>
+          <tr><td>Dewa</td><td>3</td><td>−1</td><td class="p" data-hitung="3">3</td></tr>
+          <tr><td>Bima</td><td>3</td><td>−1</td><td class="p" data-hitung="3">3</td></tr>
+        </tbody>
+      </table>
+      <div class="papan-kaki">Baris hijau lolos ke babak gugur. Dewa di atas Bima karena menang langsung 1–0.</div>
+    </figure>
+  </div>
+</section>
+
+<section class="seksi seksi-alt" aria-labelledby="judul-masalah">
+  <div class="wadah">
+    <div class="seksi-kepala">
+      <span class="label">Masalahnya</span>
+      <h2 id="judul-masalah">Turnamen antar kelas biasanya dicatat di kertas</h2>
+      <p>Empat hal yang paling sering bermasalah, dan apa yang dilakukan Gelanggang untuk masing-masing.</p>
+    </div>
+    <div class="banding" role="table" aria-label="Perbandingan cara manual dan Gelanggang">
+      <div class="banding-baris" role="row">
+        <div class="dulu" role="cell"><small>Manual</small>Klasemen dihitung tangan, sering keliru saat poin sama</div>
+        <div class="kini" role="cell"><small>Gelanggang</small>Urutan tetap: poin, selisih, head-to-head, skor memasukkan, undian</div>
+      </div>
+      <div class="banding-baris" role="row">
+        <div class="dulu" role="cell"><small>Manual</small>Bagan digambar tangan dan sulit diperbarui</div>
+        <div class="kini" role="cell"><small>Gelanggang</small>Bagan dibuat otomatis, pemenang pindah ke laga berikutnya sendiri</div>
+      </div>
+      <div class="banding-baris" role="row">
+        <div class="dulu" role="cell"><small>Manual</small>Jadwal bentrok: tim atau arena yang sama</div>
+        <div class="kini" role="cell"><small>Gelanggang</small>Jadwal yang bentrok ditolak, dengan pesan penyebabnya</div>
+      </div>
+      <div class="banding-baris" role="row">
+        <div class="dulu" role="cell"><small>Manual</small>Skor berubah tanpa jejak</div>
+        <div class="kini" role="cell"><small>Gelanggang</small>Skor dikunci. Koreksi hanya admin, wajib beralasan, tercatat di log</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seksi" id="demo" aria-labelledby="judul-demo">
+  <div class="wadah">
+    <div class="seksi-kepala">
+      <span class="label">Video demo</span>
+      <h2 id="judul-demo">Dari pendaftaran sampai juara dalam 42 detik</h2>
+    </div>
+    <div class="video-bingkai">
+      <video id="video-demo" controls preload="metadata" playsinline>
+        <source src="media/demo.mp4" type="video/mp4">
+        Peramban kamu tidak bisa memutar video ini. Buka <a href="https://github.com/iky-art/gelanggang-project/raw/main/video/demo.mp4">berkas videonya</a>.
+      </video>
+      <div class="video-galat" id="video-galat" hidden>
+        Video belum tersedia di halaman ini. Unduh dari
+        <a href="https://github.com/iky-art/gelanggang-project/raw/main/video/demo.mp4">repo GitHub</a>.
+      </div>
+    </div>
+    <p class="video-catatan">Video dibuat dengan kode memakai Remotion (folder <code>video/</code> di repo). Datanya contoh, bukan hasil turnamen nyata.</p>
+  </div>
+</section>
+
+<section class="seksi seksi-alt" id="fitur" aria-labelledby="judul-fitur">
+  <div class="wadah">
+    <div class="seksi-kepala">
+      <span class="label">Fitur</span>
+      <h2 id="judul-fitur">Yang bisa dikerjakan panitia</h2>
+    </div>
+    <ol class="fitur">
+      <li><div><h3>Tiga format turnamen</h3><p>Fase grup lalu gugur, liga satu klasemen, atau gugur langsung. Poin menang, seri, dan kalah bisa diatur.</p></div></li>
+      <li><div><h3>Tim dan pemain</h3><p>Daftar tim dengan warna dan seed, pemain dengan nickname unik per tim, dan satu kapten per tim.</p></div></li>
+      <li><div><h3>Jadwal otomatis</h3><p>Pasangan liga dengan metode lingkaran, lalu waktu dan arena disusun per ronde. Satu tim tidak main dua kali di slot yang sama.</p></div></li>
+      <li><div><h3>Klasemen otomatis</h3><p>Tie-break berurutan, dan seri total ditandai agar panitia yang memutuskan lewat nilai undian.</p></div></li>
+      <li><div><h3>Bagan gugur</h3><p>Mendukung jumlah tim bukan pangkat dua (bye), seed dari hasil grup, dan perebutan juara 3.</p></div></li>
+      <li><div><h3>Skor yang aman</h3><p>Disimpan dalam satu transaksi, dikunci, dan dikoreksi hanya oleh admin dengan alasan yang masuk log.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="seksi" id="logika" aria-labelledby="judul-logika">
+  <div class="wadah">
+    <div class="seksi-kepala">
+      <span class="label">Cara kerjanya</span>
+      <h2 id="judul-logika">Tiga bagian logika yang paling penting</h2>
+      <p>Perhitungannya ditulis sebagai fungsi murni di <code>app/logic/</code>, terpisah dari database, sehingga bisa diuji sendiri.</p>
+    </div>
+
+    <div class="blok">
+      <div>
+        <h3>Klasemen dengan tie-break yang jelas</h3>
+        <p>Peringkat ditentukan berurutan. Bila dua tim sama di satu kriteria, kriteria berikutnya yang dipakai.</p>
+        <ol class="urut">
+          <li>Poin</li>
+          <li>Selisih skor</li>
+          <li>Head-to-head: hanya laga antar tim yang sama kuat</li>
+          <li>Total skor memasukkan</li>
+          <li>Nilai undian dari panitia</li>
+        </ol>
+        <p>Bila semuanya sama, tim ditandai <span class="pill">seri total</span> dan aplikasi menolak menentukan siapa yang lolos sampai panitia mengisi undian.</p>
+      </div>
+      <div class="kotak">
+        <div class="tabel-gulir">
+          <table class="data">
+            <caption class="sr">Contoh klasemen dengan head-to-head</caption>
+            <thead><tr><th scope="col">Tim</th><th scope="col">M</th><th scope="col">Mn</th><th scope="col">S</th><th scope="col">K</th><th scope="col">SG</th><th scope="col">Poin</th></tr></thead>
+            <tbody>
+              <tr class="lolos"><td>Citra</td><td>3</td><td>2</td><td>1</td><td>0</td><td>+2</td><td>7</td></tr>
+              <tr class="lolos"><td>Aster</td><td>3</td><td>1</td><td>1</td><td>1</td><td>0</td><td>4</td></tr>
+              <tr class="seri"><td>Dewa</td><td>3</td><td>1</td><td>0</td><td>2</td><td>−1</td><td>3</td></tr>
+              <tr class="seri"><td>Bima</td><td>3</td><td>1</td><td>0</td><td>2</td><td>−1</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="catatan">Contoh data dari uji otomatis. Dewa dan Bima sama-sama 3 poin dengan selisih −1. Dewa menang 1–0 saat bertemu langsung, jadi Dewa di atas Bima, walau secara abjad Bima lebih dulu.</p>
+      </div>
+    </div>
+
+    <div class="blok balik">
+      <div>
+        <h3>Bagan gugur dengan bye dan seed standar</h3>
+        <p>Ukuran bagan dibulatkan ke pangkat dua terdekat. Selisihnya menjadi bye: tim unggulan lolos otomatis ke ronde berikutnya.</p>
+        <p>Urutan seed standar membuat seed 1 dan 2 baru bisa bertemu di final. Pada format grup, juara dan runner-up diatur agar ronde pertama tidak mempertemukan tim dari grup yang sama.</p>
+        <p>Pemenang tiap laga pindah ke laga berikutnya lewat penunjuk <code>menang_ke_id</code>.</p>
+      </div>
+      <div class="kotak">
+        <p><b>Contoh 6 tim → bagan 8, dua bye</b></p>
+        <ul class="chip-daftar" style="margin-top:.8rem">
+          <li class="bye">Seed 1 · bye</li>
+          <li>Seed 4 vs Seed 5</li>
+          <li class="bye">Seed 2 · bye</li>
+          <li>Seed 3 vs Seed 6</li>
+        </ul>
+        <p class="catatan">Coba jumlah tim lain di bagian <a href="#coba">Coba sendiri</a>.</p>
+      </div>
+    </div>
+
+    <div class="blok">
+      <div>
+        <h3>Satu simpan skor, satu transaksi</h3>
+        <p>Menyimpan skor menyentuh banyak hal sekaligus. Karena itu semuanya dikerjakan dalam satu transaksi database: berhasil bersama atau dibatalkan bersama.</p>
+        <p>Dua panitia yang membuka laga yang sama tidak bisa saling menimpa: nomor versi laga dicek saat menyimpan.</p>
+      </div>
+      <div class="kotak">
+        <ol class="transaksi">
+          <li>Validasi skor 0–99</li>
+          <li>Kunci baris dan cek nomor versi</li>
+          <li>Tentukan pemenang sesuai aturan seri</li>
+          <li>Simpan skor dan kunci laga</li>
+          <li>Majukan pemenang ke laga berikutnya</li>
+          <li>Perbarui status turnamen dan catat log</li>
+        </ol>
+        <div class="hasil"><span class="ok">Semua berhasil: commit</span><span class="batal">Gagal di mana pun: rollback</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seksi seksi-alt" id="coba" aria-labelledby="judul-coba">
+  <div class="wadah">
+    <div class="seksi-kepala">
+      <span class="label">Coba sendiri</span>
+      <h2 id="judul-coba">Hitung bagan dan jadwal liga</h2>
+      <p>Dua kalkulator ini memakai algoritma yang sama dengan <code>bagan.php</code> dan <code>jadwal.php</code> di aplikasi, ditulis ulang dalam JavaScript. Hasilnya dihitung di peramban kamu, tidak ada data yang dikirim ke mana pun.</p>
+    </div>
+    <div class="coba">
+      <section class="kotak" aria-labelledby="h-bagan">
+        <h3 id="h-bagan">Bagan gugur</h3>
+        <p class="catatan" style="margin-top:0">Masukkan jumlah tim (2–32).</p>
+        <div class="kontrol">
+          <div><label for="in-bagan">Jumlah tim</label><input id="in-bagan" type="number" min="2" max="32" value="6" inputmode="numeric"></div>
+        </div>
+        <div class="keluaran" id="out-bagan" aria-live="polite"></div>
+      </section>
+      <section class="kotak" aria-labelledby="h-liga">
+        <h3 id="h-liga">Jadwal liga</h3>
+        <p class="catatan" style="margin-top:0">Metode lingkaran: tiap tim bertemu semua tim lain.</p>
+        <div class="kontrol">
+          <div><label for="in-liga">Jumlah tim</label><input id="in-liga" type="number" min="2" max="12" value="5" inputmode="numeric"></div>
+          <label class="cek"><input id="in-pp" type="checkbox"> Pulang-pergi</label>
+        </div>
+        <div class="keluaran" id="out-liga" aria-live="polite"></div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="seksi" aria-labelledby="judul-peran">
+  <div class="wadah dua">
+    <div>
+      <span class="label">Peran</span>
+      <h2 id="judul-peran">Tiga jenis pengguna</h2>
+      <div class="kotak" style="margin-top:1.75rem">
+        <div class="tabel-gulir">
+          <table class="data">
+            <caption class="sr">Hak akses per peran</caption>
+            <thead><tr><th scope="col">Aksi</th><th scope="col">Penonton</th><th scope="col">Panitia</th><th scope="col">Admin</th></tr></thead>
+            <tbody>
+              <tr><td>Lihat klasemen dan bagan</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+              <tr><td>Kelola tim, jadwal, skor</td><td>Tidak</td><td>Ya</td><td>Ya</td></tr>
+              <tr><td>Koreksi skor terkunci</td><td>Tidak</td><td>Tidak</td><td>Ya</td></tr>
+              <tr><td>Hapus turnamen, kelola pengguna, lihat log</td><td>Tidak</td><td>Tidak</td><td>Ya</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="catatan">Hak akses dicek di server, bukan hanya dengan menyembunyikan tombol.</p>
+      </div>
+    </div>
+    <div>
+      <span class="label">Keamanan</span>
+      <h2>Dasar-dasarnya ada</h2>
+      <ul class="daftar-cek" style="margin-top:1.75rem">
+        <li><div><b>Prepared statement</b><span>Data pengguna tidak pernah disambung ke teks SQL.</span></div></li>
+        <li><div><b>Escape keluaran dan token CSRF</b><span>Mencegah XSS dan pengiriman formulir dari situs lain.</span></div></li>
+        <li><div><b>Kata sandi di-hash, tanpa akun bawaan</b><span>Admin pertama dibuat sendiri lewat halaman setup.</span></div></li>
+        <li><div><b>Login dibatasi</b><span>Lima kali gagal mengunci selama 15 menit.</span></div></li>
+        <li><div><b>Log aktivitas</b><span>Input skor, koreksi, dan perubahan penting tercatat.</span></div></li>
+      </ul>
+      <p class="catatan" style="margin-top:1.25rem">Dirancang untuk jaringan lokal. Belum diaudit pihak ketiga dan belum disiapkan untuk internet publik.</p>
+    </div>
+  </div>
+</section>
+
+<section class="seksi seksi-alt" id="pasang" aria-labelledby="judul-pasang">
+  <div class="wadah">
+    <div class="seksi-kepala">
+      <span class="label">Pasang</span>
+      <h2 id="judul-pasang">Tiga cara menjalankan di komputer sendiri</h2>
+      <p>Butuh PHP 7.4 atau lebih baru dan MySQL atau MariaDB. File Bootstrap diunduh sekali, setelah itu aplikasi berjalan tanpa internet.</p>
+    </div>
+
+    <details class="jalur" open>
+      <summary>XAMPP di Windows (tanpa terminal)</summary>
+      <div class="jalur-isi">
+        <ol>
+          <li>Salin folder proyek ke <code>C:\xampp\htdocs\gelanggang</code>.</li>
+          <li>Di XAMPP, jalankan <b>Apache</b> dan <b>MySQL</b>.</li>
+          <li>Buka <code>localhost/phpmyadmin</code>, tab <b>Impor</b>, pilih <code>database/gelanggang.sql</code>, lalu Kirim. Opsional: impor juga <code>database/data_contoh.sql</code>.</li>
+          <li>Pasang Bootstrap: buka <code>localhost/gelanggang/siapkan-aset.php</code> saat ada internet, klik tombolnya sekali.</li>
+          <li>Buka <code>localhost/gelanggang/</code> dan buat akun admin pertama di halaman setup.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="jalur">
+      <summary>Docker</summary>
+      <div class="jalur-isi">
+        <div class="kode"><pre id="k-docker">cd gelanggang/docker
+docker compose up -d --build</pre><button type="button" data-salin="k-docker">Salin</button></div>
+        <p>Aplikasi di <code>localhost:8080</code>, phpMyAdmin di <code>localhost:8081</code>. Skema database dimuat otomatis.</p>
+      </div>
+    </details>
+
+    <details class="jalur">
+      <summary>Termux di Android</summary>
+      <div class="jalur-isi">
+        <div class="kode"><pre id="k-termux">pkg install php mariadb curl unzip
+mysql_install_db
+mysqld_safe --datadir=$PREFIX/var/lib/mysql &amp;
+mariadb -u root &lt; ~/gelanggang/database/gelanggang.sql
+cd ~/gelanggang/assets/vendor
+curl -LO https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
+curl -LO https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
+cd ~/gelanggang
+DB_HOST=127.0.0.1 php -S 0.0.0.0:8080</pre><button type="button" data-salin="k-termux">Salin</button></div>
+        <p>Buka <code>localhost:8080</code> di peramban ponsel. Server bawaan PHP tidak membaca <code>.htaccess</code>, jadi jangan dibuka ke jaringan umum.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="seksi" id="dokumen" aria-labelledby="judul-dokumen">
+  <div class="wadah">
+    <div class="seksi-kepala">
+      <span class="label">Dokumen</span>
+      <h2 id="judul-dokumen">Dokumentasi lengkap di repo</h2>
+      <p>Folder <code>docs/</code> berisi 25 berkas, dan <code>presentasi/</code> berisi bahan presentasi UKK beserta tanya jawab.</p>
+    </div>
+    <ul class="dokumen">
+      <li><a href="https://github.com/iky-art/gelanggang-project/blob/main/docs/04-instalasi-xampp-windows.md"><span class="no">04</span><b>Instalasi XAMPP</b><span>Langkah tanpa terminal untuk laptop sekolah</span></a></li>
+      <li><a href="https://github.com/iky-art/gelanggang-project/blob/main/docs/08-struktur-database.md"><span class="no">08</span><b>Struktur database</b><span>Tabel, relasi, dan perilaku hapus</span></a></li>
+      <li><a href="https://github.com/iky-art/gelanggang-project/blob/main/docs/11-logika-klasemen.md"><span class="no">11</span><b>Logika klasemen</b><span>Tie-break dan seri total</span></a></li>
+      <li><a href="https://github.com/iky-art/gelanggang-project/blob/main/docs/13-logika-bagan-gugur.md"><span class="no">13</span><b>Logika bagan gugur</b><span>Seed, bye, dan juara 3</span></a></li>
+      <li><a href="https://github.com/iky-art/gelanggang-project/blob/main/docs/14-logika-input-skor.md"><span class="no">14</span><b>Logika input skor</b><span>Transaksi, penguncian, koreksi</span></a></li>
+      <li><a href="https://github.com/iky-art/gelanggang-project/blob/main/docs/16-keamanan.md"><span class="no">16</span><b>Keamanan</b><span>Kontrol yang ada dan batasannya</span></a></li>
+      <li><a href="https://github.com/iky-art/gelanggang-project/blob/main/docs/19-pengujian.md"><span class="no">19</span><b>Pengujian</b><span>Uji otomatis dan daftar uji manual</span></a></li>
+      <li><a href="https://github.com/iky-art/gelanggang-project/tree/main/presentasi"><span class="no">P</span><b>Bahan presentasi</b><span>Slide, naskah demo, dan tanya jawab penguji</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="seksi seksi-alt" id="faq" aria-labelledby="judul-faq">
+  <div class="wadah">
+    <div class="seksi-kepala">
+      <span class="label">Pertanyaan umum</span>
+      <h2 id="judul-faq">Yang sering ditanyakan</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Apakah ada demo online yang bisa dicoba?</summary>
+        <p>Belum. Gelanggang adalah aplikasi PHP dengan database MySQL, sedangkan situs ini hanya halaman statis. Untuk mencobanya, jalankan sendiri di komputer atau ponsel. Kalkulator di bagian Coba sendiri dan video demo adalah yang bisa dilihat di sini.</p></details>
+      <details><summary>Bisa dipakai tanpa internet?</summary>
+        <p>Bisa. Satu-satunya yang butuh internet adalah mengunduh dua file Bootstrap saat pemasangan awal. Setelah itu tidak ada CDN, font web, atau API luar.</p></details>
+      <details><summary>Memakai framework apa?</summary>
+        <p>Tidak ada framework. PHP polos, MySQL lewat PDO, dan Bootstrap 5.3 untuk tampilan, sehingga setiap alurnya bisa dibaca dan dijelaskan baris demi baris.</p></details>
+      <details><summary>Amankah dipasang di internet publik?</summary>
+        <p>Belum disiapkan untuk itu. Aplikasi dirancang untuk jaringan lokal. Untuk server publik, kamu perlu HTTPS, kata sandi database khusus, dan menghapus <code>siapkan-aset.php</code> serta folder <code>tests/</code>. Rinciannya ada di dokumen keamanan.</p></details>
+      <details><summary>Apa yang belum ada?</summary>
+        <p>Format Swiss dan double elimination, skor per game untuk seri Bo3, logo tim, dan reset kata sandi lewat email. Daftar lengkapnya ada di dokumen keterbatasan dan pengembangan.</p></details>
+      <details><summary>Bolehkah dipakai untuk UKK?</summary>
+        <p>Kode dan dokumennya disediakan sebagai bahan belajar dengan lisensi MIT. Kalau dipakai untuk ujian, pahami setiap bagiannya dan siapkan penjelasan dengan kata-katamu sendiri. Penguji biasanya meminta penjelasan kode, bukan hanya demo.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="seksi penutup" aria-labelledby="judul-penutup">
+  <div class="wadah">
+    <h2 id="judul-penutup">Coba di komputer sendiri</h2>
+    <p>Unduh kodenya, impor database, dan jalankan turnamen contoh dalam beberapa menit.</p>
+    <div class="hero-aksi">
+      <a class="tombol tombol-utama" href="https://github.com/iky-art/gelanggang-project/archive/refs/heads/main.zip">Unduh ZIP dari GitHub</a>
+      <a class="tombol" href="https://github.com/iky-art/gelanggang-project" rel="noopener">Lihat repo</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="kaki">
+  <div class="wadah kaki-dalam">
+    <span><b>Gelanggang</b> · lisensi MIT · contoh proyek UKK RPL</span>
+    <span><a href="https://github.com/iky-art/gelanggang-project" rel="noopener">github.com/iky-art/gelanggang-project</a></span>
+  </div>
+</footer>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>

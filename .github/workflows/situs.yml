@@ -1,0 +1,51 @@
+# Menerbitkan folder situs/ ke GitHub Pages.
+# Prasyarat satu kali: Settings -> Pages -> Source: GitHub Actions.
+name: Deploy situs
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'situs/**'
+      - '.github/workflows/situs.yml'
+  workflow_run:
+    workflows: ['Render video demo']
+    types: [completed]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Susun folder situs
+        run: |
+          mkdir -p _site/media
+          cp -r situs/. _site/
+          if [ -f video/demo.mp4 ]; then
+            cp video/demo.mp4 _site/media/demo.mp4
+          else
+            echo "video/demo.mp4 belum ada; situs akan menampilkan pesan video belum tersedia"
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
