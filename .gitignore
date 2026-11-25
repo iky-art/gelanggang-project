@@ -3,3 +3,8 @@ assets/vendor/*.css
 assets/vendor/*.js
 .DS_Store
 Thumbs.db
+
+# Remotion
+video/node_modules/
+video/out/
+video/poster.png

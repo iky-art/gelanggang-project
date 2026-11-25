@@ -1,0 +1,48 @@
+# Merender video/demo.mp4 dari kode Remotion lalu menyimpannya kembali ke repo.
+# Jalan otomatis saat video/src atau video/package.json berubah, atau manual dari tab Actions.
+name: Render video demo
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'video/src/**'
+      - 'video/package.json'
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: video
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Pasang pustaka sistem untuk Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libdbus-1-3 libatk1.0-0 libgbm-dev libasound2 \
+            libxrandr2 libxkbcommon-dev libxfixes3 libxcomposite1 libxdamage1 \
+            libatk-bridge2.0-0 libpango-1.0-0 libcairo2 libcups2
+
+      - name: Pasang dependensi
+        run: npm install
+
+      - name: Render
+        run: npx remotion render src/index.ts Demo demo.mp4 --codec=h264
+
+      - name: Simpan hasil ke repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add demo.mp4
+          git commit -m "Render video demo" || echo "Tidak ada perubahan"
+          git push

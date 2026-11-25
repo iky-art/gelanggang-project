@@ -2,6 +2,16 @@
 
 Aplikasi manajemen turnamen e-sport sekolah: tim, pemain, jadwal, skor, klasemen, dan bagan gugur otomatis. Dibuat dengan **PHP polos + MySQL (phpMyAdmin) + Bootstrap 5.3**, berjalan **penuh offline** di localhost, dan disiapkan sebagai contoh proyek UKK RPL.
 
+## Video demo
+
+[▶ Tonton video demo](video/demo.mp4)
+
+Video ±42 detik ini dibuat **dengan kode** memakai [Remotion](https://www.remotion.dev/) (folder `video/`): masalah turnamen manual, fitur, alur, klasemen dengan head-to-head, bagan gugur, input skor yang aman, dan keamanan. Isinya data contoh, bukan hasil turnamen nyata.
+
+- File `video/demo.mp4` dibuat otomatis oleh GitHub Actions (`.github/workflows/render-video.yml`). Jalankan manual dari tab **Actions → Render video demo → Run workflow**. Sebelum workflow pertama selesai, tautan di atas belum aktif.
+- Merender sendiri atau mengubah isi video: lihat [`video/README.md`](video/README.md).
+- Ingin video tampil langsung di halaman README? Di GitHub, klik ikon pensil pada README lalu seret `demo.mp4` ke editor; GitHub membuat pemutar bawaan.
+
 ## Mulai cepat (XAMPP, tanpa terminal)
 
 1. Salin folder ini ke `C:\xampp\htdocs\gelanggang`.
@@ -22,6 +32,7 @@ Jalur lain: Docker (`docker/`), Termux (`docs/06-instalasi-termux-android.md`).
 | `database/` | Skema dan data contoh |
 | `docker/` | Dockerfile dan docker-compose |
 | `tests/` | Uji logika inti (`tests/uji-logika.php`) |
+| `video/` | Video demo dibuat dengan kode (Remotion) |
 | `docs/` | Dokumentasi lengkap (25 berkas) |
 | `presentasi/` | Bahan presentasi UKK (25 berkas) |
 
